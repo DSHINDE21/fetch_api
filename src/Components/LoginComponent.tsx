@@ -8,15 +8,17 @@ import {
   Button,
   Heading,
   useToast,
+  Text,
 } from "@chakra-ui/react";
 import { LoginFormProps } from "../Models/LoginModel";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
   const toast = useToast();
+  // const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,18 +29,18 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
         title: "Login Successful",
         description: "Welcome back!",
         status: "success",
-        duration: 500,
+        duration: 1000,
         isClosable: true,
       });
       onLogin(username, password);
       navigate("/list");
-      // window.location.reload();
+      // setLoggedIn(true);
     } else {
       toast({
         title: "Login Failed",
         description: "Invalid username or password. Please try again.",
         status: "error",
-        duration: 500,
+        duration: 1000,
         isClosable: true,
       });
     }
@@ -84,6 +86,9 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
           <Button type="submit" colorScheme="teal" size="lg" w="100%">
             Login
           </Button>
+          <Text p={3}>
+            Don't have an account? <Link to="/register">Register</Link>
+          </Text>
         </form>
       </Container>
     </Center>

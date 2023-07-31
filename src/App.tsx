@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPageView />} />
         <Route path="/list" element={<ListPageView />} />
+        <Route path="/register" />
       </Routes>
     </>
   );

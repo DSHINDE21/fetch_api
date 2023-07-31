@@ -1,19 +1,24 @@
 import React from "react";
 import ApiCaller from "../Api/ApiCaller";
-import { Center, Container, Heading } from "@chakra-ui/react";
+import { Center, Container, Flex, Heading } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { handleLogout } from "../Utils/logoutUtils";
+import LogoutButton from "../Components/LogoutButton";
 
 const ListPageView: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Container maxW="sm" mt={3}>
         <Center position="sticky" top="0" zIndex="1" bg="white">
-          <Heading as="h1" size="xl" color="red.500" textAlign="center">
+          <Heading as="h1" size="xl" color="red.500" textAlign="center" mt={5}>
             User List
           </Heading>
         </Center>
-
-        {/* Call to API */}
       </Container>
+      <Flex justifyContent="flex-end" p={4}>
+        <LogoutButton handleLogout={() => handleLogout(navigate)} />
+      </Flex>
       <ApiCaller />
     </>
   );
