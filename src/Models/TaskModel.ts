@@ -10,6 +10,8 @@ export interface Task {
     type: string;
     occupation: string | null;
     preferred_language: string | null;
+    // loan_status: string | null;
+    e_nach_submitted: "pending";
   };
   verification_fees_details: {
     amount: number;

@@ -26,6 +26,7 @@ const ListPageView: React.FC = () => {
         <Flex justifyContent="flex-end" p={4}>
           <LogoutButton handleLogout={() => handleLogout(navigate)} />
         </Flex>
+
         <ApiCaller />
       </Box>
     </>

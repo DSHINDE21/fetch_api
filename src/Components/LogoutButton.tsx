@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, useToast } from "@chakra-ui/react";
+import { ArrowLeftIcon } from "@chakra-ui/icons";
 
 interface LogoutButtonProps {
   handleLogout: () => void;
@@ -22,7 +23,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ handleLogout }) => {
 
   return (
     <Button colorScheme="red" onClick={handleLogoutClick}>
-      Logout
+      <ArrowLeftIcon /> Logout
     </Button>
   );
 };

@@ -10,6 +10,13 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
+import {
+  BellIcon,
+  CheckCircleIcon,
+  CheckIcon,
+  InfoIcon,
+  MinusIcon,
+} from "@chakra-ui/icons";
 
 interface TaskTableProps {
   data: Task[];
@@ -40,6 +47,8 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
             <Th>Loan Amount</Th>
             <Th>Type</Th>
             <Th>Language</Th>
+            <Th>e_nach</Th>
+            <Th>occupation</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -55,6 +64,24 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
               <Td>{task.verification_fees_details.amount}</Td>
               <Td>{task.created_by.type}</Td>
               <Td>{task.created_by.preferred_language}</Td>
+              {/* <Td>{task.e_nach_submitted}</Td> */}
+              <Td>
+                {task.e_nach_submitted === "Pending" ? (
+                  <InfoIcon />
+                ) : (
+                  <CheckIcon />
+                )}
+              </Td>
+              {/* <Td>{task.created_by.occupation}</Td> */}
+              <Td>
+                {task.created_by.occupation === "Salaried" ? (
+                  <CheckCircleIcon color="green" />
+                ) : task.created_by.occupation === "Self Employed" ? (
+                  <CheckIcon color="blue" />
+                ) : (
+                  <MinusIcon color="red" />
+                )}
+              </Td>
             </Tr>
           ))}
         </Tbody>
