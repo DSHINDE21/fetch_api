@@ -10,12 +10,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { LoginFormProps } from "../Models/LoginModel";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
   const toast = useToast();
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -23,7 +23,6 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
 
     // Check if the provided username and password match the specified values
     if (username === "dinesh" && password === "admin") {
-      // alert("Login Successful");
       toast({
         title: "Login Successful",
         description: "Welcome back!",
@@ -32,7 +31,8 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
         isClosable: true,
       });
       onLogin(username, password);
-      history.push("/list");
+      navigate("/list");
+      // window.location.reload();
     } else {
       toast({
         title: "Login Failed",
@@ -41,8 +41,6 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
         duration: 500,
         isClosable: true,
       });
-
-      // console.error("Invalid username or password");
     }
   };
 
@@ -83,13 +81,7 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
-          <Button
-            type="submit"
-            colorScheme="teal"
-            size="lg"
-            w="100%"
-            onSubmit={handleSubmit}
-          >
+          <Button type="submit" colorScheme="teal" size="lg" w="100%">
             Login
           </Button>
         </form>
