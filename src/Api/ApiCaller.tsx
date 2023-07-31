@@ -3,14 +3,14 @@ import { Task } from "../Models/TaskModel";
 import axios from "axios";
 import { APIURL, headers } from "../Constants";
 import Loader from "../Components/Loader";
-import TaskTable from "./TaskTable"; // Import the new component
+import TaskTable from "../Components/TaskTable";
 
 const ApiCaller = () => {
   const [data, setData] = useState<Task[] | null>(null);
 
   useEffect(() => {
     async function fetchData() {
-      //constants removed in constants.tsx
+      //constants moved in constants.tsx
       try {
         const response = await axios.get<{ response: { task_list: Task[] } }>(
           APIURL,

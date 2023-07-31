@@ -4,6 +4,6 @@ export const APIURL =
 // setting headers
 // enter Authorization key here
 export const headers = {
-  Authorization: "Token a80b184ba5612fe11999621d25104020a6e87272",
+  Authorization: "Token 52c456a4bddcb9c34d6cd9d55f2feac09db3668a",
   // Other headers if needed
 };
