@@ -14,7 +14,7 @@ import { LoginFormProps } from "../Models/LoginModel";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
-  const [username, setUsername] = React.useState("");
+  const [Email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
   const toast = useToast();
@@ -23,8 +23,8 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Check if the provided username and password match the specified values
-    if (username === "dinesh" && password === "admin") {
+    // Check if the provided Email and password match the specified values
+    if (Email === "dinesh.s.shinde1@gmail.com" && password === "admin") {
       toast({
         title: "Login Successful",
         description: "Welcome back!",
@@ -32,13 +32,13 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
         duration: 1000,
         isClosable: true,
       });
-      onLogin(username, password);
+      onLogin(Email, password);
       navigate("/list");
       // setLoggedIn(true);
     } else {
       toast({
         title: "Login Failed",
-        description: "Invalid username or password. Please try again.",
+        description: "Invalid Email or password. Please try again.",
         status: "error",
         duration: 1000,
         isClosable: true,
@@ -63,14 +63,14 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
           <Heading as="h1" size="lg" mb={6} textAlign="center" color="white">
             Login Page
           </Heading>
-          <FormControl mb={4}>
-            <FormLabel htmlFor="username">Username:</FormLabel>
+          <FormControl mb={4} isRequired>
+            <FormLabel htmlFor="Email">Email:</FormLabel>
             <Input
-              type="text"
-              id="username"
-              value={username}
-              placeholder="enter username"
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              id="Email"
+              value={Email}
+              placeholder="enter Email"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
           <FormControl mb={4}>
