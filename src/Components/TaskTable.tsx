@@ -11,7 +11,6 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import {
-  BellIcon,
   CheckCircleIcon,
   CheckIcon,
   InfoIcon,
@@ -64,7 +63,6 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
               <Td>{task.verification_fees_details.amount}</Td>
               <Td>{task.created_by.type}</Td>
               <Td>{task.created_by.preferred_language}</Td>
-              {/* <Td>{task.e_nach_submitted}</Td> */}
               <Td>
                 {task.e_nach_submitted === "Pending" ? (
                   <InfoIcon />
