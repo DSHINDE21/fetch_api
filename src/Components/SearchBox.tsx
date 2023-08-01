@@ -14,7 +14,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
   };
 
   const handleSearch = () => {
-    // console.log(searchQuery);
+    console.log(searchQuery);
+
     if (!searchQuery) {
       toast({
         title: "Empty Search",

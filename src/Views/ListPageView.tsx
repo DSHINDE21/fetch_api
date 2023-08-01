@@ -12,10 +12,8 @@ const ListPageView: React.FC = () => {
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
+
     // console.log(query);
-    // if (!query) {
-    //   console.log("empty");
-    // }
   };
 
   return (
