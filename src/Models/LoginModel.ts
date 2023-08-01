@@ -1,5 +1,6 @@
 export interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
+  searchQuery: string;
 }
 
 export interface FormValues {

@@ -3,7 +3,7 @@ import { Task } from "../Models/TaskModel";
 import axios from "axios";
 import { APIURL, headers } from "../Constants";
 import Loader from "../Components/Loader";
-import TaskTable from "../Components/TaskTable";
+import TaskTable from "../Components/TaskTableApiData";
 
 const ApiCaller = () => {
   const [data, setData] = useState<Task[] | null>(null);

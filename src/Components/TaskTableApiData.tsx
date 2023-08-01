@@ -65,7 +65,7 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
               <Td>{task.created_by.preferred_language}</Td>
               <Td>
                 {task.e_nach_submitted === "Pending" ? (
-                  <InfoIcon />
+                  <InfoIcon color="tomato" />
                 ) : (
                   <CheckIcon />
                 )}
@@ -75,9 +75,9 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
                 {task.created_by.occupation === "Salaried" ? (
                   <CheckCircleIcon color="green" />
                 ) : task.created_by.occupation === "Self Employed" ? (
-                  <CheckIcon color="blue" />
+                  <InfoIcon color="red" />
                 ) : (
-                  <MinusIcon color="red" />
+                  <MinusIcon color="black" />
                 )}
               </Td>
             </Tr>

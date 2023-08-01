@@ -8,7 +8,7 @@ const Loader: React.FC = () => {
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
       toast.closeAll();
-    }, 2000);
+    }, 3000);
 
     toast({
       title: "Data Loading",
