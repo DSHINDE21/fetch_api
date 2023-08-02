@@ -9,6 +9,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Tooltip,
 } from "@chakra-ui/react";
 import {
   CheckCircleIcon,
@@ -65,7 +66,9 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
               <Td>{task.created_by.preferred_language}</Td>
               <Td>
                 {task.e_nach_submitted === "Pending" ? (
-                  <InfoIcon color="tomato" />
+                  <Tooltip label="Pending" fontSize="md">
+                    <InfoIcon color="tomato" />
+                  </Tooltip>
                 ) : (
                   <CheckIcon />
                 )}
@@ -73,11 +76,17 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
               {/* <Td>{task.created_by.occupation}</Td> */}
               <Td>
                 {task.created_by.occupation === "Salaried" ? (
-                  <CheckCircleIcon color="green" />
+                  <Tooltip label="Salaried" fontSize="md">
+                    <CheckCircleIcon color="green" />
+                  </Tooltip>
                 ) : task.created_by.occupation === "Self Employed" ? (
-                  <InfoIcon color="red" />
+                  <Tooltip label="Self Employed" fontSize="md">
+                    <InfoIcon color="red" />
+                  </Tooltip>
                 ) : (
-                  <MinusIcon color="black" />
+                  <Tooltip label="Other" fontSize="md">
+                    <MinusIcon color="black" />
+                  </Tooltip>
                 )}
               </Td>
             </Tr>

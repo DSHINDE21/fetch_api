@@ -17,28 +17,6 @@ const ApiCaller = () => {
   useEffect(() => {
     async function fetchData() {
       //constants moved in constants.tsx
-      // try {
-      // let response;
-
-      // if (isLoginSuccessful) {
-      //   response = await axios.get<{ response: { task_list: Task[] } }>(
-      //     `${BASEURL}${USERLIST}${API_RM_ID}`,
-
-      //     { headers }
-      //   );
-      // } else {
-      //   response = await axios.get<{ response: { task_list: Task[] } }>(
-      //     `${BASEURL}${SEARCH}${searchQuery}${API_RM_ID}`,
-      //     { headers }
-      //   );
-      // }
-
-      //   setData(response.data.response.task_list);
-      // } catch (error) {
-      //   console.error("Error fetching data:", error);
-      //   // Handle the error state here
-      // }
-      // }
       try {
         const response = await axios.get<{ response: { task_list: Task[] } }>(
           `${BASEURL}${USERLIST}${API_RM_ID}`,
@@ -57,7 +35,7 @@ const ApiCaller = () => {
   if (data) {
     return (
       <>
-        <TaskTable data={data} /> {/* Use the TaskTable component */}
+        <TaskTable data={data} />
       </>
     );
   }

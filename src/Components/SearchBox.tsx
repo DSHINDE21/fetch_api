@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, IconButton, Flex, Box, useToast } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { Task } from "../Models/TaskModel";
+import axios from "axios";
+import { BASEURL, SEARCH, API_RM_ID, headers } from "../Constants";
+import TaskTable from "../Components/TaskTableApiData";
+import Loader from "./Loader";
 
 interface SearchBoxProps {
   onSearch: (query: string) => void;
-  searchQuery: string; // Receive searchQuery as prop
+  searchQuery: string;
 }
 
 const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
   const toast = useToast();
+  const [data1, setData] = useState<Task[] | null>(null);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onSearch(event.target.value); // Use onSearch directly, no need for a separate state
+    onSearch(event.target.value);
   };
 
-  const handleSearch = () => {
-    console.log(searchQuery);
-
+  const handleSearch = async () => {
     if (!searchQuery) {
       toast({
         title: "Empty Search",
@@ -24,7 +29,34 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
         duration: 3000,
         isClosable: true,
       });
+      return;
     }
+
+    try {
+      const response = await axios.get<{ response: { task_list: Task[] } }>(
+        `${BASEURL}${SEARCH}${searchQuery}${API_RM_ID}`,
+        { headers }
+      );
+      // setData((prevData) => {
+      //   if (prevData) {
+      //     return [...prevData, ...response.data.response.task_list];
+      //   } else {
+      //     return response.data.response.task_list;
+      //   }
+      // });
+      setData(response.data1.response.task_list);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Handle the error state here
+    }
+    if (data1) {
+      return (
+        <>
+          <TaskTable data={data1} />
+        </>
+      );
+    }
+    return <Loader />;
   };
 
   return (
@@ -55,10 +87,10 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
           onClick={handleSearch}
           colorScheme="teal"
           borderRadius="md"
-          bg="teal.500"
-          _hover={{ bg: "teal.600" }}
         />
       </Flex>
+
+      {data1 ? <TaskTable data={data1} /> : null}
     </Box>
   );
 };
