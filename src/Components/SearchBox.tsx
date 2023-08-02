@@ -14,7 +14,7 @@ interface SearchBoxProps {
 
 const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
   const toast = useToast();
-  const [data1, setData] = useState<Task[] | null>(null);
+  const [data, setData] = useState<Task[] | null>(null);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSearch(event.target.value);
@@ -44,15 +44,15 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
       //     return response.data.response.task_list;
       //   }
       // });
-      setData(response.data1.response.task_list);
+      setData(response.data.response.task_list);
     } catch (error) {
       console.error("Error fetching data:", error);
       // Handle the error state here
     }
-    if (data1) {
+    if (data) {
       return (
         <>
-          <TaskTable data={data1} />
+          <TaskTable data={data} />
         </>
       );
     }
@@ -90,7 +90,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
         />
       </Flex>
 
-      {data1 ? <TaskTable data={data1} /> : null}
+      {data ? <TaskTable data={data} /> : null}
     </Box>
   );
 };
