@@ -23,6 +23,7 @@ interface TaskTableProps {
 }
 
 const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
+  console.log(data);
   return (
     <TableContainer overflowX="auto" maxW="100%" m={2}>
       <Table

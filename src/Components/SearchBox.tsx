@@ -45,18 +45,20 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
       //   }
       // });
       setData(response.data.response.task_list);
+
+      data ? <TaskTable data={data} /> : null;
     } catch (error) {
       console.error("Error fetching data:", error);
       // Handle the error state here
     }
-    if (data) {
-      return (
-        <>
-          <TaskTable data={data} />
-        </>
-      );
-    }
-    return <Loader />;
+    // if (data) {
+    //   return (
+    //     <>
+    //       <TaskTable data={data} />
+    //     </>
+    //   );
+    // }
+    // return <Loader />;
   };
 
   return (
@@ -90,7 +92,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
         />
       </Flex>
 
-      {data ? <TaskTable data={data} /> : null}
+      {/* {data ? <TaskTable data={data} /> : null} */}
     </Box>
   );
 };
