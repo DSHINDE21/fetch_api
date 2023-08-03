@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../Utils/logoutUtils";
 import LogoutButton from "../Components/LogoutButton";
 import SearchBox from "../Components/SearchBox";
-import TaskTable from "../Components/TaskTableApiData";
 
 const ListPageView: React.FC = () => {
   const navigate = useNavigate();

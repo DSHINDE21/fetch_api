@@ -12,6 +12,7 @@ export interface Task {
     preferred_language: string | null;
     // loan_status: string | null;
     e_nach_submitted: "pending";
+    since_agreement: string | null;
   };
   verification_fees_details: {
     amount: number;

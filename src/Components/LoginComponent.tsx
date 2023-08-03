@@ -1,6 +1,7 @@
 import React from "react";
 import { FormValues, LoginFormProps } from "../Models/LoginModel";
 import { Link, useNavigate } from "react-router-dom";
+import { Flex, Image } from "@chakra-ui/react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import {
@@ -78,6 +79,10 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
         >
           {({ isSubmitting }) => (
             <Form>
+              <Flex justify="center" mb={3}>
+                <Image src="/logo.png" alt="Logo" h="50px" />
+              </Flex>
+
               <Heading
                 as="h1"
                 size="lg"

@@ -36,9 +36,11 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
         size="sm"
       >
         <TableCaption>Borrower List</TableCaption>
+
         <Thead>
           <Tr>
             <Th>ID</Th>
+            {/* <Th>since_agreement</Th> */}
             <Th>Name</Th>
             <Th>Gender</Th>
             <Th>DOB</Th>
@@ -56,6 +58,7 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
           {data.map((task) => (
             <Tr key={task.id}>
               <Td>{task.id}</Td>
+              {/* <Td>{task.since_agreement}</Td> */}
               <Td>{task.created_by.first_name}</Td>
               <Td>{task.created_by.gender}</Td>
               <Td>{task.created_by.dob}</Td>

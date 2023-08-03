@@ -5,7 +5,6 @@ import { Task } from "../Models/TaskModel";
 import axios from "axios";
 import { BASEURL, SEARCH, API_RM_ID, headers } from "../Constants";
 import TaskTable from "../Components/TaskTableApiData";
-import Loader from "./Loader";
 
 interface SearchBoxProps {
   onSearch: (query: string) => void;
@@ -39,6 +38,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
       );
 
       setData((prevData) => {
+        console.log(prevData);
         if (prevData) {
           return [...prevData, ...response.data.response.task_data];
         } else {
@@ -84,7 +84,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
           />
         </Flex>
       </Box>
-      {data ? <TaskTable data={data} /> : null}
+      <Box maxW="100%">{data ? <TaskTable data={data} /> : null}</Box>
     </div>
   );
 };
