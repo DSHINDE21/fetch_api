@@ -15,6 +15,7 @@ import {
   useToast,
   Text,
 } from "@chakra-ui/react";
+import { EmailIcon, UnlockIcon } from "@chakra-ui/icons";
 
 const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
   const navigate = useNavigate();
@@ -93,7 +94,10 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
                 Login Page
               </Heading>
               <FormControl mb={4}>
-                <FormLabel htmlFor="email">Email:</FormLabel>
+                <FormLabel htmlFor="email">
+                  <EmailIcon mr={3} />
+                  Email:
+                </FormLabel>
                 <Field
                   type="email"
                   id="email"
@@ -104,7 +108,10 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
                 <ErrorMessage name="email" component="div" className="error" />
               </FormControl>
               <FormControl mb={4}>
-                <FormLabel htmlFor="password">Password:</FormLabel>
+                <FormLabel htmlFor="password">
+                  <UnlockIcon mr={2} />
+                  Password:
+                </FormLabel>
                 <Field
                   type="password"
                   id="password"
