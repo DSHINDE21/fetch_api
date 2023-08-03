@@ -94,7 +94,7 @@ const ApiCaller = () => {
     }
 
     fetchData();
-  }, []);
+  }, [toast]);
 
   if (data) {
     return (

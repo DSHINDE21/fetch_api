@@ -33,67 +33,59 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, searchQuery }) => {
     }
 
     try {
-      const response = await axios.get<{ response: { task_list: Task[] } }>(
+      const response = await axios.get<{ response: { task_data: Task[] } }>(
         `${BASEURL}${SEARCH}${searchQuery}${API_RM_ID}`,
         { headers }
       );
-      // setData((prevData) => {
-      //   if (prevData) {
-      //     return [...prevData, ...response.data.response.task_list];
-      //   } else {
-      //     return response.data.response.task_list;
-      //   }
-      // });
-      setData(response.data.response.task_list);
 
-      data ? <TaskTable data={data} /> : null;
+      setData((prevData) => {
+        if (prevData) {
+          return [...prevData, ...response.data.response.task_data];
+        } else {
+          console.log("This is else condition");
+          return response.data.response.task_data;
+        }
+      });
     } catch (error) {
       console.error("Error fetching data:", error);
-      // Handle the error state here
     }
-    // if (data) {
-    //   return (
-    //     <>
-    //       <TaskTable data={data} />
-    //     </>
-    //   );
-    // }
-    // return <Loader />;
   };
 
   return (
-    <Box
-      display="inline-block"
-      borderRadius="md"
-      borderWidth="1px"
-      borderColor="gray.300"
-      p="2px"
-      bgColor="white"
-      boxShadow="sm"
-    >
-      <Flex alignItems="center">
-        <Input
-          type="text"
-          value={searchQuery}
-          onChange={handleInputChange}
-          placeholder="Search..."
-          size="sm"
-          variant="unstyled"
-          _focus={{ outline: "none" }}
-          _placeholder={{ color: "gray.400" }}
-        />
-        <IconButton
-          aria-label="Search"
-          icon={<SearchIcon />}
-          ml={2}
-          onClick={handleSearch}
-          colorScheme="teal"
-          borderRadius="md"
-        />
-      </Flex>
-
-      {/* {data ? <TaskTable data={data} /> : null} */}
-    </Box>
+    <div>
+      <Box
+        display="inline-block"
+        borderRadius="md"
+        borderWidth="1px"
+        borderColor="gray.300"
+        mb="2px"
+        p="2px"
+        bgColor="white"
+        boxShadow="sm"
+      >
+        <Flex alignItems="center">
+          <Input
+            type="text"
+            value={searchQuery}
+            onChange={handleInputChange}
+            placeholder="Search..."
+            size="sm"
+            variant="unstyled"
+            _focus={{ outline: "none" }}
+            _placeholder={{ color: "gray.400" }}
+          />
+          <IconButton
+            aria-label="Search"
+            icon={<SearchIcon />}
+            ml={2}
+            onClick={handleSearch}
+            colorScheme="teal"
+            borderRadius="md"
+          />
+        </Flex>
+      </Box>
+      {data ? <TaskTable data={data} /> : null}
+    </div>
   );
 };
 
