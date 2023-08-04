@@ -1,4 +1,4 @@
-import { SearchIcon } from "@chakra-ui/icons";
+import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Input, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 
@@ -29,6 +29,12 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
     setSearchQuery(event.target.value);
   };
 
+  const handleClearSearch = () => {
+    setSearchQuery(""); // Clear the search input
+    const isSearch = false; // Set isSearch to false since it's not a search
+    onSearch(isSearch, ""); // Notify the parent component that the search is cleared
+  };
+
   return (
     <div>
       <Flex direction="column" alignItems="flex-start" p={4}>
@@ -53,6 +59,16 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
               _focus={{ outline: "none" }}
               _placeholder={{ color: "gray.400" }}
             />
+            {searchQuery && ( // Render the close icon conditionally when searchQuery is not empty
+              <IconButton
+                aria-label="Clear Search"
+                icon={<CloseIcon />}
+                ml={2}
+                onClick={handleClearSearch}
+                colorScheme="teal"
+                borderRadius="md"
+              />
+            )}
             <IconButton
               aria-label="Search"
               icon={<SearchIcon />}
