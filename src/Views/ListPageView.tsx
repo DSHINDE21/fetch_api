@@ -7,6 +7,7 @@ import { Task } from "../Models/TaskModel";
 import { fetchDataFromAPI } from "../Api/ApiCaller";
 import TaskTable from "../Components/TaskTableApiData";
 import SearchBox from "../Components/SeachBox";
+import Loader from "../Components/Loader";
 
 const ListPageView = () => {
   const navigate = useNavigate();
@@ -22,21 +23,19 @@ const ListPageView = () => {
     console.table(data);
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await fetchDataFromAPI(false, "");
-  //     console.log(data);
-  //     handleDataFetched(data);
-  //   };
-  //   fetchData();
-  // }, []);
-
   // data from all calls stored here and then pass to TaskTable.tsx
-
   const handleDataFetched = (data: Task[] | null) => {
-    setDataFetched(data);
-    console.log("Value is :", data);
+    if (data) {
+      setDataFetched(data);
+      console.log("Value is :", data);
+    } else {
+      <Loader />;
+      setIsLoading(true);
+      console.log("yes");
+    }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,8 +43,10 @@ const ListPageView = () => {
         const data = await fetchDataFromAPI(false, "");
         console.log("i am login:", data);
         setDataFetched(data);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setIsLoading(false);
       }
     };
 
@@ -64,7 +65,7 @@ const ListPageView = () => {
       </Container>
       <LogoutButton handleLogout={() => handleLogout(navigate)} />
       <SearchBox onSearch={handleSearch} />
-      <TaskTable data={dataFetched} />
+      {isLoading ? <Loader /> : <TaskTable data={dataFetched} />}{" "}
     </Box>
   );
 };

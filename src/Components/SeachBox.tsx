@@ -1,6 +1,8 @@
-import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
+// ... Other imports and code ...
+
+import { CloseIcon, SearchIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Input, useToast } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface SearchBoxProps {
   onSearch: (isSearch: boolean, searchQuery: string) => void;
@@ -8,8 +10,10 @@ interface SearchBoxProps {
 
 const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // New state for loading
   const toast = useToast();
-  const handleSearch = () => {
+
+  const handleSearch = async () => {
     if (!searchQuery) {
       toast({
         title: "Empty Search",
@@ -21,8 +25,10 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
       return;
     }
 
+    setIsLoading(true); // Set loading to true when search starts
     const isSearch = true;
-    onSearch(isSearch, searchQuery);
+    await onSearch(isSearch, searchQuery);
+    setIsLoading(false); // Set loading back to false when search is complete
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,16 +65,19 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
               _focus={{ outline: "none" }}
               _placeholder={{ color: "gray.400" }}
             />
-            {searchQuery && ( // Render the close icon conditionally when searchQuery is not empty
+            {searchQuery && (
               <IconButton
                 aria-label="Clear Search"
                 icon={<CloseIcon />}
                 ml={2}
                 onClick={handleClearSearch}
-                colorScheme="teal"
+                colorScheme="red"
                 borderRadius="md"
+                isDisabled={isLoading}
               />
             )}
+            {/* Set isDisabled prop to disable the button when loading is true */}
+
             <IconButton
               aria-label="Search"
               icon={<SearchIcon />}
@@ -76,6 +85,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
               onClick={handleSearch}
               colorScheme="teal"
               borderRadius="md"
+              isDisabled={isLoading}
             />
           </Flex>
         </Box>
@@ -85,5 +95,3 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
 };
 
 export default SearchBox;
-
-// isSearch and query value sent to parent component listapageview
