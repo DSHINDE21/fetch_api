@@ -1,20 +1,56 @@
-import React, { useState } from "react";
-import ApiCaller from "../Api/ApiCaller";
-import { Center, Container, Flex, Heading, Box, Image } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Center, Container, Heading, Box, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../Utils/logoutUtils";
 import LogoutButton from "../Components/LogoutButton";
-import SearchBox from "../Components/SearchBox";
+import { Task } from "../Models/TaskModel";
+import { fetchDataFromAPI } from "../Api/ApiCaller";
+import TaskTable from "../Components/TaskTableApiData";
+import SearchBox from "../Components/SeachBox";
 
-const ListPageView: React.FC = () => {
+const ListPageView = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
-  // const [isActive, setisActived] = useState(false);
+  // const [dataFetched, setDataFetched] = useState<Task[]>([]);
+  const [dataFetched, setDataFetched] = useState<Task[]>([]);
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    // setisActived(true);
+  const handleSearch = async (isSearch: boolean, searchQuery: string) => {
+    console.log(isSearch);
+    console.log(searchQuery);
+    const data = await fetchDataFromAPI(isSearch, searchQuery);
+    handleDataFetched(data);
+    // Pass the data to handleDataFetched
+    console.table(data);
   };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await fetchDataFromAPI(false, "");
+  //     console.log(data);
+  //     handleDataFetched(data);
+  //   };
+  //   fetchData();
+  // }, []);
+
+  // data from all calls stored here and then pass to TaskTable.tsx
+
+  const handleDataFetched = (data: Task[] | null) => {
+    setDataFetched(data);
+    console.log("Value is :", data);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchDataFromAPI(false, "");
+        console.log("i am login:", data);
+        setDataFetched(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Box>
@@ -26,16 +62,9 @@ const ListPageView: React.FC = () => {
           </Heading>
         </Center>
       </Container>
-      <Flex justifyContent="flex-end" p={4}>
-        <LogoutButton handleLogout={() => handleLogout(navigate)} />
-      </Flex>
-      <Flex direction="column" alignItems="flex-start" p={4}>
-        <SearchBox onSearch={handleSearch} searchQuery={searchQuery} />
-        {/* {isActive ? null : <ApiCaller />} */}
-        {/* <TaskTable data={data} /> */}
-      </Flex>
-
-      <ApiCaller />
+      <LogoutButton handleLogout={() => handleLogout(navigate)} />
+      <SearchBox onSearch={handleSearch} />
+      <TaskTable data={dataFetched} />
     </Box>
   );
 };

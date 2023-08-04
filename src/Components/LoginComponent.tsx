@@ -48,6 +48,7 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
           isClosable: true,
         });
         onLogin(values.email, values.password);
+
         navigate("/list");
       } else {
         toast({

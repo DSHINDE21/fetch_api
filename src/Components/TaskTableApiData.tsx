@@ -26,7 +26,8 @@ interface TaskTableProps {
 }
 
 const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
-  // console.log(data);
+  console.log("I am table data: ", data);
+
   return (
     <TableContainer overflowX="auto" maxW="100%" m={2}>
       <Table
@@ -45,7 +46,8 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
             <Th>
               {/* since_agreement <TriangleUpIcon /> <TriangleDownIcon /> */}
               <Flex p={2} flexDirection="column" alignItems="center">
-                since_agreement <TriangleUpIcon /> <TriangleDownIcon />
+                since_agreement <TriangleUpIcon as="button" />
+                <TriangleDownIcon as="button" />
               </Flex>
             </Th>
             <Th>ID</Th>
