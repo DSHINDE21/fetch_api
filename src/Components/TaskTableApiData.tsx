@@ -10,16 +10,14 @@ import {
   TableCaption,
   TableContainer,
   Tooltip,
-  Flex,
 } from "@chakra-ui/react";
 import {
   CheckCircleIcon,
   CheckIcon,
   InfoIcon,
   MinusIcon,
-  TriangleDownIcon,
-  TriangleUpIcon,
 } from "@chakra-ui/icons";
+import Arrows from "./Arrows";
 
 interface TaskTableProps {
   data: Task[];
@@ -45,10 +43,11 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
           <Tr>
             <Th>
               {/* since_agreement <TriangleUpIcon /> <TriangleDownIcon /> */}
-              <Flex p={2} flexDirection="column" alignItems="center">
+              <Arrows />
+              {/* <Flex p={2} flexDirection="column" alignItems="center">
                 since_agreement <TriangleUpIcon as="button" />
                 <TriangleDownIcon as="button" />
-              </Flex>
+              </Flex> */}
             </Th>
             <Th>ID</Th>
             <Th>Name</Th>
