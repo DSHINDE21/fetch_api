@@ -24,8 +24,6 @@ interface TaskTableProps {
 }
 
 const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
-  console.log("I am table data: ", data);
-
   return (
     <TableContainer overflowX="auto" maxW="100%" m={2}>
       <Table
@@ -42,12 +40,7 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
         <Thead>
           <Tr>
             <Th>
-              {/* since_agreement <TriangleUpIcon /> <TriangleDownIcon /> */}
               <Arrows />
-              {/* <Flex p={2} flexDirection="column" alignItems="center">
-                since_agreement <TriangleUpIcon as="button" />
-                <TriangleDownIcon as="button" />
-              </Flex> */}
             </Th>
             <Th>ID</Th>
             <Th>Name</Th>
@@ -87,7 +80,6 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
                   <CheckIcon />
                 )}
               </Td>
-              {/* <Td>{task.created_by.occupation}</Td> */}
               <Td>
                 {task.created_by.occupation === "Salaried" ? (
                   <Tooltip label="Salaried" fontSize="md">

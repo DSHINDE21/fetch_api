@@ -1,35 +1,38 @@
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { Flex } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { fetchDataFromAPI } from "../Api/ApiCaller";
 
 const Arrows: React.FC = () => {
-  const [isUpClicked, setIsUpClicked] = useState(false);
-  const [isDownClicked, setIsDownClicked] = useState(false);
+  const [sortOrder, setSortOrder] = useState("ASC");
 
-  //   const handleApiCall = (isUp: boolean, type: string) => {
-  //     if (isUp && type === "ASC") {
-  //       //   console.log("Calling API for up arrow");
-  //     } else if (!isUp && type === "DESC") {
-  //       //   console.log("Calling API for down arrow");
-  //     }
-  //   };
-
-  const handleOrder = (type: string) => {
-    if (type === "ASC") {
-      setIsUpClicked(true);
-      setIsDownClicked(false);
-      //  handleApiCall(true, type);
-    } else if (type === "DESC") {
-      setIsDownClicked(true);
-      setIsUpClicked(false);
-      // handleApiCall(false, type);
+  const handleOrder = async (order: string) => {
+    if (order === "ASC") {
+      setSortOrder("ASC");
+    } else if (order === "DESC") {
+      setSortOrder("DESC");
     }
   };
 
+  const callApiWithSortOrder = async () => {
+    try {
+      const data = await fetchDataFromAPI(false, "", sortOrder);
+
+      if (data) {
+        console.log("Data from API:", data);
+      } else {
+        console.log("Data not available.");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  callApiWithSortOrder();
+
   useEffect(() => {
-    console.log("bool up1 :", isUpClicked);
-    console.log("bool down1 :", isDownClicked);
-  }, [isUpClicked, isDownClicked]);
+    console.log("Sort Order:", sortOrder);
+  }, [sortOrder]);
 
   return (
     <div>
@@ -40,13 +43,13 @@ const Arrows: React.FC = () => {
           as="button"
           _hover={{ cursor: "pointer" }}
           onClick={() => handleOrder("ASC")}
-          color={isUpClicked ? "green.500" : "gray.500"}
+          color={sortOrder === "ASC" ? "green.500" : "gray.500"}
         />
         <TriangleDownIcon
           as="button"
           _hover={{ cursor: "pointer" }}
           onClick={() => handleOrder("DESC")}
-          color={isDownClicked ? "red.500" : "gray.500"}
+          color={sortOrder === "DESC" ? "red.500" : "gray.500"}
         />
       </Flex>
     </div>

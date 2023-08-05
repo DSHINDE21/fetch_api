@@ -64,7 +64,7 @@ const LoginComponent: React.FC<LoginFormProps> = ({ onLogin }) => {
   };
 
   return (
-    <Center h="100vh" bgGradient="linear(to-b, #E0D2C7, #44B09E)">
+    <Center h="100vh" bgGradient="linear(to-b, #E0D2C7, #44B09E) ">
       <Container
         background="linear-gradient(135deg, #2193b0, #6dd5ed)"
         boxShadow="md"

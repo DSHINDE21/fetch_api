@@ -10,28 +10,25 @@ import SearchBox from "../Components/SeachBox";
 import Loader from "../Components/Loader";
 
 const ListPageView = () => {
+  // const typeValue = "ASC";
   const navigate = useNavigate();
   // const [dataFetched, setDataFetched] = useState<Task[]>([]);
   const [dataFetched, setDataFetched] = useState<Task[]>([]);
 
   const handleSearch = async (isSearch: boolean, searchQuery: string) => {
-    console.log(isSearch);
-    console.log(searchQuery);
-    const data = await fetchDataFromAPI(isSearch, searchQuery);
+    const data = await fetchDataFromAPI(isSearch, searchQuery, "");
     handleDataFetched(data);
     // Pass the data to handleDataFetched
-    console.table(data);
   };
 
   // data from all calls stored here and then pass to TaskTable.tsx
   const handleDataFetched = (data: Task[] | null) => {
     if (data) {
       setDataFetched(data);
-      console.log("Value is :", data);
+      // setIsLoading(false);
     } else {
       <Loader />;
       setIsLoading(true);
-      console.log("yes");
     }
   };
 
@@ -40,8 +37,7 @@ const ListPageView = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchDataFromAPI(false, "");
-        console.log("i am login:", data);
+        const data = await fetchDataFromAPI(false, "", "");
         setDataFetched(data);
         setIsLoading(false);
       } catch (error) {
