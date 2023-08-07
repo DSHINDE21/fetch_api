@@ -19,20 +19,39 @@ export const fetchDataFromAPI = async (
 ): Promise<Task[] | null> => {
   let url1 = false;
   let url = `${BASEURL}${USERLIST}${API_RM_ID}`;
-  if (isSearch && searchQuery && !sortOrder) {
+
+  /*
+  if (isSearch && searchQuery.length != 0 && !sortOrder) {
     url = `${BASEURL}${SEARCH}${searchQuery}${API_RM_ID}`;
     url1 = true;
   } else {
     // Use the provided sortOrder to set the appropriate URL
     if (sortOrder === ASC) {
+      console.log(sortOrder);
       url = `${BASEURL}${USERLIST}${SORT}${ASC}`;
     } else if (sortOrder === DESC) {
       url = `${BASEURL}${USERLIST}${SORT}${DESC}`;
     }
   }
-  // else {
-  //   url = `${BASEURL}${USERLIST}${SORT}${ASC}`;
-  // }
+  */
+
+  switch (true) {
+    case isSearch && searchQuery.length !== 0 && !sortOrder:
+      url = `${BASEURL}${SEARCH}${searchQuery}${API_RM_ID}`;
+      url1 = true;
+      break;
+    case sortOrder === ASC && isSearch && searchQuery.length == 0:
+      url = `${BASEURL}${USERLIST}${SORT}${ASC}`;
+
+      break;
+    case sortOrder === DESC:
+      url = `${BASEURL}${USERLIST}${SORT}${DESC}`;
+      break;
+    default:
+      url = `${BASEURL}${USERLIST}${API_RM_ID}`;
+
+      break;
+  }
 
   try {
     if (!url1) {

@@ -1,5 +1,6 @@
 export interface Task {
   id: number;
+
   created_by: {
     first_name: string;
     gender: string;
@@ -11,10 +12,10 @@ export interface Task {
     occupation: string | null;
     preferred_language: string | null;
     // loan_status: string | null;
-    e_nach_submitted: "pending";
-    since_agreement: string | null;
   };
   verification_fees_details: {
     amount: number;
   };
+  e_nach_submitted: string | null;
+  since_agreement: string | null;
 }
